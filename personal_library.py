@@ -6,7 +6,7 @@ Version: 1.0
 '''
 def show_menue():
     '''
-    This is going to display the main menue options to the user
+    This is going to display the main menu options to the user
     '''
     print("\nPersonal Library Menue")
     print("1. Add a Book")
@@ -15,8 +15,15 @@ def show_menue():
     print("4. Search for a Book")
     print("5. Exit")
 
-def add_book():
-    pass
+def add_book(library:list[str]):
+    '''
+    This is going to allow the user to add a book to the library
+    '''
+    title = input("Enter the title of the book: ").strip()
+    library.append(title)
+
+    print(f"Added: {title}")
+    
 
 def remove_book():
     pass
@@ -32,12 +39,14 @@ def main():
     '''
     This is going to loop the menue options
     '''
+    library: list[str] = [] # library is originally empty
+
     while True:
         show_menue()
         choice = input("choose an option: ").strip()
 
         if choice == "1":
-            add_book()
+            add_book(library)
         elif choice == "2":
             remove_book()
         elif choice == "3":
