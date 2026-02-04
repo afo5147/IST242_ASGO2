@@ -20,9 +20,18 @@ def add_book(library:list[str]):
     This is going to allow the user to add a book to the library
     '''
     title = input("Enter the title of the book: ").strip()
-    library.append(title)
-
-    print(f"Added: {title}")
+    if title in library:
+        update = input(f"'{title}' already exists, would you like to update information? Y/N: ").strip().upper()
+        if update == "Y":
+            library.remove(title)
+            library.append(input("Enter the updated title of the book: ").strip())
+            print(f"'{title}' has been updated in the library.")
+        elif update == "N":
+            print("No changes made.")
+    else:
+        library.append(title)
+        print(f"'{title}' has been added to the library.")
+    
     
 
 def remove_book():
