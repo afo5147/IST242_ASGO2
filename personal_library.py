@@ -20,16 +20,29 @@ def add_book(library:list[str]):
     This is going to allow the user to add a book to the library
     '''
     title = input("Enter the title of the book: ").strip()
-    library.append(title)
-
-    print(f"Added: {title}")
+    if title in library:
+        update = input(f"'{title}' already exists, would you like to update information? Y/N: ").strip().upper()
+        if update == "Y":
+            library.remove(title)
+            library.append(input("Enter the updated title of the book: ").strip())
+            print(f"'{title}' has been updated in the library.")
+        elif update == "N":
+            print("No changes made.")
+    else:
+        library.append(title)
+        print(f"'{title}' has been added to the library.")
+    
     
 
 def remove_book():
     pass
 
-def list_books():
-    pass
+def list_books(library:list[str]):
+    '''
+    This is going to show all the books in the library
+    '''
+
+    print(f"Library: {library}")
 
 def search_books():
     pass
@@ -50,11 +63,11 @@ def main():
         elif choice == "2":
             remove_book()
         elif choice == "3":
-            list_books()
+            list_books(library)
         elif choice == "4":
             search_books()
         elif choice == "5":
-            print("Goodbye!")
+            print("Thank you for using this library!")
             break
         else:
             print("Not valid, please try again.")
