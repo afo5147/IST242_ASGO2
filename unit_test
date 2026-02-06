@@ -1,0 +1,36 @@
+"""
+Testing personal library
+"""
+# Python libraries imported for testing
+import unittest
+from unittest.mock import patch
+from io import StringIO
+
+# Import our user made functions for testing
+from personal_library import (
+    add_book,
+    view_books,
+    search_book,
+    delete_book,
+    update_book,
+    statistic,
+    save_library,
+    uploading_library
+)
+# Test class
+class TestPersonalLibrary(unittest.TestCase):
+
+    # Test case for add_book function
+    @patch("builtins.input", side_effect=["Arknis", "Thuan Nguyen", "2026"])
+    def test_add_book_normal_case(self, mock_input):
+        library = {}
+        add_book(library)
+        self.assertIn("Arknis", library)
+        self.assertEqual(library["Arknis"]["author"], "Thuan Nguyen")
+        self.assertEqual(library["Arknis"]["year"], 2026)
+
+
+
+# Call the test case main method
+if __name__ == "__main__":
+    unittest.main()
