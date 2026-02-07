@@ -13,7 +13,7 @@ from personal_library import (
     search_books,
     remove_book,
     #update_book,
-    #statistic,
+    statistic,
     #save_library,
     #uploading_library
 )
@@ -64,6 +64,21 @@ class TestPersonalLibrary(unittest.TestCase):
 
         remove_book(library)
         self.assertNotIn("Arknis", library)
+
+
+    def test_statistic(self):
+        library = {
+            "Arknis": {"author": "Thuan Nguyen", "year": 2026},
+            "If Sunlight can bring Winter": {"author": "Huu Ne Uyng", "year": 2020},
+            "The Eternal Elemental War": {"author": "Thuan Nguyen", "year": 2024}
+        }
+
+        with patch("sys.stdout", new=StringIO()) as fake_out:
+            statistic(library)
+            output = fake_out.getvalue()
+
+        self.assertIn("Thuan Nguyen - 2 books", output)
+        self.assertIn("Huu Ne Uyng - 1 book", output)
     
 
 # Call the test case main method
