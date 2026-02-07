@@ -10,7 +10,7 @@ from io import StringIO
 from personal_library import (
     add_book,
     list_books,
-    #search_book,
+    search_books,
     #delete_book,
     #update_book,
     #statistic,
@@ -42,6 +42,18 @@ class TestPersonalLibrary(unittest.TestCase):
         self.assertIn("Thuan Nguyen", output)
         self.assertIn("2026", output)
 
+
+    @patch("builtins.input", return_value="rk")
+    def test_search_book(self, mock_input):
+        library = {
+            "Arknis": {"author": "Thuan Nguyen", "year": 2026}
+        }
+
+        with patch("sys.stdout", new=StringIO()) as fake_out:
+            search_books(library)
+            output = fake_out.getvalue()
+
+        self.assertIn("Arknis", output)
 
 
 # Call the test case main method
