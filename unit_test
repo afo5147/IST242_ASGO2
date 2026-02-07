@@ -9,13 +9,13 @@ from io import StringIO
 # Import our user made functions for testing
 from personal_library import (
     add_book,
-    view_books,
-    search_book,
-    delete_book,
-    update_book,
-    statistic,
-    save_library,
-    uploading_library
+    list_books,
+    #search_book,
+    #delete_book,
+    #update_book,
+    #statistic,
+    #save_library,
+    #uploading_library
 )
 # Test class
 class TestPersonalLibrary(unittest.TestCase):
@@ -28,6 +28,19 @@ class TestPersonalLibrary(unittest.TestCase):
         self.assertIn("Arknis", library)
         self.assertEqual(library["Arknis"]["author"], "Thuan Nguyen")
         self.assertEqual(library["Arknis"]["year"], 2026)
+
+
+    def test_view_book_output(self):
+        library = {
+            "Arknis": {"author": "Thuan Nguyen", "year": 2026}
+        }
+        with patch("sys.stdout", new=StringIO()) as fake_out:
+            list_books(library)
+            output = fake_out.getvalue()
+
+        self.assertIn("Arknis", output)
+        self.assertIn("Thuan Nguyen", output)
+        self.assertIn("2026", output)
 
 
 
