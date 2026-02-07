@@ -11,7 +11,7 @@ from personal_library import (
     add_book,
     list_books,
     search_books,
-    #delete_book,
+    remove_book,
     #update_book,
     #statistic,
     #save_library,
@@ -55,6 +55,16 @@ class TestPersonalLibrary(unittest.TestCase):
 
         self.assertIn("Arknis", output)
 
+
+    @patch("builtins.input", return_value="Arknis")
+    def test_delete_book(self, mock_input):
+        library = {
+            "Arknis": {"author": "Thuan Nguyen", "year": 2026}
+        }
+
+        remove_book(library)
+        self.assertNotIn("Arknis", library)
+    
 
 # Call the test case main method
 if __name__ == "__main__":
